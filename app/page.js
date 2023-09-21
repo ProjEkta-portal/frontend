@@ -1,11 +1,11 @@
-import Header from "@/components/Header";
-// import FeaturedProjects from "@/components/FeaturedProjects";
+import Header from "@/components/HomePage/Header";
+import FeatureProjects from "@/components/HomePage/FeatureProjects";
 
 export default function Home() {
   return (
     <section>
       <Header />
-      {/* <FeaturedProjects /> */}
+      <FeatureProjects />
     </section>
   );
 }
