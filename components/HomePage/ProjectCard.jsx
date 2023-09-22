@@ -1,5 +1,7 @@
 "use client";
+
 import React from "react";
+
 import {
   Card,
   CardHeader,
@@ -9,16 +11,17 @@ import {
   Button,
   Progress,
 } from "@nextui-org/react";
-import { FaUniversity, FaUserFriends } from "react-icons/fa";
-import { GiAchievement } from "react-icons/gi";
-const ProjectCard = (props) => {
+
+import {FaUniversity, FaUserFriends} from "react-icons/fa";
+import {GiAchievement} from "react-icons/gi";
+
+export default function ProjectCard(props) {
   const data = props.data;
   const colors = ["#FFFBD4", "#DEE0FF", "#FFD4D4", "#D4FFED"];
   const color = colors[data.id % 4];
+
   return (
     <Card
-      isBlurred
-      isPressable
       className={`border-none !bg-[${color}] max-w-[500px] p-1 my-3`}
       shadow="sm"
       onPress={() => {
@@ -59,6 +62,4 @@ const ProjectCard = (props) => {
       </CardFooter>
     </Card>
   );
-};
-
-export default ProjectCard;
+}
