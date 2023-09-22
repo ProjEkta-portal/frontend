@@ -1,7 +1,8 @@
 "use client";
 import { Image, Chip } from "@nextui-org/react";
+import ProjectCard from '@/components/projects/ProjectCard';
 
-export default function CollegePageCard({collegeDetails}) {
+export default function CollegePageCard({collegeDetails, projects}) {
 
     return (
       <div className="relative m-4 max-h-[48rem] rounded-lg overflow-auto">
@@ -37,6 +38,11 @@ export default function CollegePageCard({collegeDetails}) {
               ))}
             </tbody>
           </table>
+          <div className="p-4 grid md:grid-cols-2 sm:grid-cols-1 gap-10">
+            {projects.map((project) => (
+            <ProjectCard project={project} />
+            ))}
+        </div>
         </div>
       </div>
     );
