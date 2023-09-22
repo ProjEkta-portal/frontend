@@ -41,7 +41,12 @@ export default function SignupPage() {
     if (
       user.email.length > 0 &&
       user.password.length > 0 &&
-      user.name.length > 0
+      user.name.length > 0 &&
+      user.contact > 0 &&
+      user.university.length > 0 &&
+      user.course.length > 0 &&
+      user.areasOfInterest.length > 0 &&
+      user.skills.length > 0
     ) {
       setButtonDisabled(false);
     } else {

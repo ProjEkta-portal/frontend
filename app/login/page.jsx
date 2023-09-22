@@ -6,9 +6,41 @@ import InputField from "/components/login-and-signup/InputField";
 import SocialIcon from "/components/login-and-signup/SocialIcon";
 import NavigationLink from "/components/login-and-signup/NavigationLink";
 // import AuthLayout from '/app/AuthLayout';
+import React, { useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 export default function Login() {
   const router = useRouter();
+  const [user, setUser] = React.useState({
+    email: "",
+    password: "",
+  });
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+
+  const onLogin = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post("/api/users/login", user);
+      console.log("Login success", response.data);
+      toast.success("Login success");
+      router.push("/");
+    } catch (error) {
+      console.log("Login failed", error.message);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user.email.length > 0 && user.password.length > 0) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [user]);
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-white p-4">
@@ -44,13 +76,15 @@ export default function Login() {
               type="email"
               placeholder="Email ID"
               iconSrc="/assets/mail-filled.svg"
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
             />
-
-            {/* Password Input Field */}
             <InputField
               type="password"
-              placeholder="Password"
+              placeholder="Create Password"
               iconSrc="/assets/lock-filled.svg"
+              value={user.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
             />
 
             {/* Or Text */}
@@ -84,7 +118,7 @@ export default function Login() {
             {/* Login Button */}
             <button
               className="orange-btn h-[64px] flex items-center justify-center transition-transform duration-300 ease-out transform"
-              onClick={() => router.push("/dashboard")}
+              onClick={onLogin}
             >
               LOGIN
             </button>

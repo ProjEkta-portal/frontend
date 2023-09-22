@@ -1,3 +1,4 @@
+import Chatbot from "@/components/Chat/Chatbot";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/Navbar";
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               {children}
             </main>
+            <Chatbot />
           </div>
         </Providers>
       </body>
