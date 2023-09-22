@@ -8,12 +8,12 @@ import {
   CardBody,
   CardFooter,
   Divider,
-  Link,
   Image,
   Chip,
 } from "@nextui-org/react";
 
 import {CollegeIcon, ContributorsIcon, StarsIcon} from "../icons";
+import Link from "next/link";
 
 export default function ProjectCard({project}) {
   return (
@@ -27,10 +27,14 @@ export default function ProjectCard({project}) {
           width={40}
         />
         <div className="flex flex-col">
-          <p className="text-lg font-inter font-bold">{project.name}</p>
+          <Link href={`/users/${project.userId}/projects/${project.name}`}>
+            <p className="text-lg font-inter font-bold">{project.name}</p>
+          </Link>
           <div className="flex flex-row gap-x-2">
             <CollegeIcon />
-            <p className="text-small">{project.collegeName}</p>
+            <Link href={`/colleges/${project.collegeId}`}>
+              <p className="text-small">{project.collegeName}</p>
+            </Link>
           </div>
         </div>
       </CardHeader>

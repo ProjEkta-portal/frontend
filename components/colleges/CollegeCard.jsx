@@ -8,10 +8,11 @@ import {
   CardBody,
   CardFooter,
   Divider,
-  Link,
   Image,
   Chip,
 } from "@nextui-org/react";
+
+import Link from "next/link";
 
 import {CollegeIcon, ContributorsIcon, StarsIcon} from "../icons";
 
@@ -27,7 +28,9 @@ export default function CollegeCard({college}) {
           width={40}
         />
         <div className="flex flex-col">
-          <p className="text-lg font-inter font-bold">{college.name}</p>
+          <Link href={`/colleges/${college.collegeId}`}>
+            <p className="text-lg font-inter font-bold">{college.name}</p>
+          </Link>
           <div className="flex flex-row gap-x-2">
             <p className="text-small">{college.state + ", " + college.city}</p>
           </div>

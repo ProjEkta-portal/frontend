@@ -1,26 +1,46 @@
-import CollegePageCard from '@/components/colleges/[collegeName]/CollegePageCard';
+import CollegePageCard from "@/components/colleges/[collegeName]/CollegePageCard";
 
-function getCollegeDetails(params) {
-  const collegeName = params.collegeName;
+async function getCollege(collegeId) {
+  // return {
+  //   collegeName: "VIT Chennai",
+  //   researchAreas: [
+  //     "Machine Learning",
+  //     "Distributed Computing",
+  //     "Embedded Circuits",
+  //   ],
+  //   collegeInfo: {
+  //     about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  //         Proin non diam ut justo bibendum vulputate. Suspendisse potenti. Nulla
+  //         facilisi. Sed id purus at urna efficitur facilisis vel non dui. Fusce
+  //         aliquet enim id nisi commodo, non tempus urna congue. Integer bibendum nulla
+  //         nec urna auctor, sit amet euismod nunc pharetra. Sed in quam sit amet
+  //         velit sagittis lacinia nec eget leo. Fusce non eleifend nisl.`,
+  //     university: "VIT University,",
+  //     projektaContact: "Dr. Rahul M",
+  //   },
+  //   coverImg: "/assets/projects/high-res-img.jpg",
+  // };
 
-  return {
-      collegeName: "VIT Chennai",
-      researchAreas: ["Machine Learning", "Distributed Computing", "Embedded Circuits"],
-      collegeInfo: {
-          about: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Proin non diam ut justo bibendum vulputate. Suspendisse potenti. Nulla
-          facilisi. Sed id purus at urna efficitur facilisis vel non dui. Fusce
-          aliquet enim id nisi commodo, non tempus urna congue. Integer bibendum nulla
-          nec urna auctor, sit amet euismod nunc pharetra. Sed in quam sit amet
-          velit sagittis lacinia nec eget leo. Fusce non eleifend nisl.`,
-          university: "VIT University,",
-          projektaContact: "Dr. Rahul M",
-      },
-      coverImg: "/assets/projects/high-res-img.jpg",
-  };
+  let res = await fetch(process.env.BACKEND_URL + `/colleges/${collegeId}`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Unable to fetch college data");
+  }
+
+  let data = await res.json();
+
+  data.researchAreas = [
+    "Machine Learning",
+    "Distributed Computing",
+    "Embedded Circuits",
+  ];
+
+  return data;
 }
 
-function getProjects(params) {
+function getCollegeProjects(collegeId) {
   return [
     {
       userId: "Rahul-7323",
@@ -85,13 +105,8 @@ function getProjects(params) {
   ];
 }
 
-export default function CollegePage({params}) {
-  let collegeDetails = getCollegeDetails(params);
-  let projects = getProjects(params);
-  return (
-    <CollegePageCard
-      collegeDetails={collegeDetails}
-      projects={projects}
-    />
-  );
+export default async function CollegePage({params}) {
+  let college = await getCollege(params.collegeId);
+  let projects = await getCollegeProjects(params.collegeId);
+  return <CollegePageCard college={college} projects={projects} />;
 }
