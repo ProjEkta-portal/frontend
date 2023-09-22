@@ -70,7 +70,10 @@ export default async function ProjectsPage() {
   let projects = await getProjects();
 
   return (
-    <div className="flex flex-col gap-y-20">
+    <div className="flex flex-col gap-y-10">
+      <div>
+        <p className="font-sansita text-5xl">Projects</p>
+      </div>
       <div>
         <SearchBar placeholder={"Search for projects..."} />
       </div>
