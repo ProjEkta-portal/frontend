@@ -1,8 +1,9 @@
+"use client";
+import { Image } from "@nextui-org/react";
+import { ProjectPageCard } from "@/components/users/[userId]/projects/[projectName]/ProjectPageCard"
+
 export default function UserProjectPage({params}) {
   return (
-    <h1>
-      Project page for the project {params.projectName} under the user{" "}
-      {params.userId}
-    </h1>
+    <ProjectPageCard params={params} />
   );
 }
