@@ -19,6 +19,8 @@ module.exports = {
           700: "#3F3292",
         },
         orange: "#FF9C39",
+        beige: "#FF9C3966",
+        gray: "#D9D6E966"
       },
     },
   },
