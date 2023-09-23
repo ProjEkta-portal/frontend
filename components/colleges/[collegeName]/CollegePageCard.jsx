@@ -28,6 +28,7 @@ export default function CollegePageCard({college, projects}) {
               radius="sm"
               variant="bordered"
               className="text-purple-700 border-purple-700 m-4 border-1 font-inter"
+              key={tag}
             >
               {tag}
             </Chip>
@@ -45,7 +46,7 @@ export default function CollegePageCard({college, projects}) {
         </table>
         <div className="p-4 grid md:grid-cols-2 sm:grid-cols-1 gap-10">
           {projects.map((project) => (
-            <ProjectCard project={project} />
+            <ProjectCard project={project} key={project.projectId} />
           ))}
         </div>
       </div>

@@ -1,14 +1,14 @@
 // pages/signup/personal-info/page.jsx
 "use client";
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import React, {useState, useEffect} from "react";
+import {useRouter} from "next/navigation";
 import Image from "next/image";
 import InputField from "/components/login-and-signup/InputField";
 import SocialIcon from "/components/login-and-signup/SocialIcon";
 import NavigationLink from "/components/login-and-signup/NavigationLink";
 import ProgressBar from "/components/login-and-signup/ProgressBar";
 
-export default function PersonalInfo({ onNext }) {
+export default function PersonalInfo({onNext}) {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -60,7 +60,7 @@ export default function PersonalInfo({ onNext }) {
             Personal Information
           </h2>
           <div className="body">
-            Welcome! Let's start with your basic information.
+            {"Welcome! Let's start with your basic information."}
           </div>
           <ProgressBar currentStep={1} />
 

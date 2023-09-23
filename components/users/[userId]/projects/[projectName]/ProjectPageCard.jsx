@@ -55,6 +55,7 @@ export default function ProjectPageCard({project}) {
               radius="sm"
               variant="bordered"
               className="text-purple-700 border-purple-700 m-4 border-1 font-inter"
+              key={tag}
             >
               {tag}
             </Chip>

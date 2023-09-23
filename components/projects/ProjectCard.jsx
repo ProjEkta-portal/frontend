@@ -46,6 +46,7 @@ export default function ProjectCard({project}) {
               radius="sm"
               variant="bordered"
               className="text-purple-700 border-purple-700 border-1 font-inter"
+              key={tag}
             >
               {tag}
             </Chip>
