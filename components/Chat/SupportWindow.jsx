@@ -6,7 +6,7 @@ import ChatEngine from "./ChatEngine";
 const SupportWindow = (props) => {
   return (
     <div
-      className="transition-5"
+      className="transition-5 z-50"
       style={{
         ...styles.supportWindow,
         ...{ opacity: props.visible ? "1" : "0" },

@@ -44,7 +44,7 @@ section {
 .input-field {
   width: 512px;
   height: 48px;
-  background-color: #F9F9FB;
+  background-color: #f9f9fb;
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
   position: relative;
 }
@@ -69,14 +69,35 @@ section {
   z-index: 1;
   top: 125%;
   left: 50%;
-  margin-left: -60px; 
+  margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
-  font-family: "sansita"; 
-  font-size: 16px; 
+  font-family: "sansita";
+  font-size: 16px;
 }
 
 .orange-btn:hover .tooltip {
   visibility: visible;
   opacity: 1;
+}
+
+.scrollbar-w-2::-webkit-scrollbar {
+  width: 0.25rem;
+  height: 0.25rem;
+}
+
+.scrollbar-track-blue-lighter::-webkit-scrollbar-track {
+  --bg-opacity: 1;
+  background-color: #f7fafc;
+  background-color: rgba(247, 250, 252, var(--bg-opacity));
+}
+
+.scrollbar-thumb-blue::-webkit-scrollbar-thumb {
+  --bg-opacity: 1;
+  background-color: #edf2f7;
+  background-color: rgba(237, 242, 247, var(--bg-opacity));
+}
+
+.scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+  border-radius: 0.25rem;
 }

@@ -4,7 +4,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
-const ChatInput = (props) => {
+const ChatInput = ({ messages, setMessages }) => {
   const textareaRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [input, setInput] = useState("");
@@ -14,7 +14,8 @@ const ChatInput = (props) => {
     setIsLoading(true);
 
     try {
-      await axios.post("/api/message/send", { text: input, chatId });
+      // await axios.post("/api/message/send", { text: input, chatId });
+      setMessages([...messages, input]);
       setInput("");
       textareaRef.current?.focus();
     } catch {
@@ -28,6 +29,7 @@ const ChatInput = (props) => {
     <div className="absolute bottom-0 w-full border-t border-gray-200 px-1 pt-1 mb-1 sm:mb-0">
       <div className="relative overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
         <TextareaAutosize
+          ref={textareaRef}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
