@@ -42,8 +42,8 @@ section {
 }
 
 .input-field {
-  width: 512px;
-  height: 48px;
+  /* width: 512px; */
+  /* height: 24px; */
   background-color: #f9f9fb;
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
   position: relative;
@@ -54,8 +54,8 @@ section {
   top: 50%;
   transform: translateY(-50%);
   left: 4px;
-  width: 24px;
-  height: 24px;
+  /* width: 24px;
+  height: 24px; */
 }
 
 .tooltip {

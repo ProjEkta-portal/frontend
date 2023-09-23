@@ -1,9 +1,8 @@
 // pages/signup/plag-check/page.jsx
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import InputField from "/components/login-and-signup/InputField";
-
 export default function CheckPlag({ onNext }) {
   const router = useRouter();
   const [primaryTitle, setPrimaryTitle] = useState("");
@@ -11,14 +10,22 @@ export default function CheckPlag({ onNext }) {
   const [secondaryTitle, setSecondaryTitle] = useState("");
   const [secondaryDescription, setSecondaryDescription] = useState("");
   const [isValid, setIsValid] = useState(false);
-  const [plagiarismResult, setPlagiarismResult] = useState(null); 
+  const [plagiarismResult, setPlagiarismResult] = useState(null);
 
   useEffect(() => {
     console.log(
       "Is Valid:",
-      primaryTitle && primaryDescription && secondaryTitle && secondaryDescription
+      primaryTitle &&
+        primaryDescription &&
+        secondaryTitle &&
+        secondaryDescription
     );
-    setIsValid(primaryTitle && primaryDescription && secondaryTitle && secondaryDescription);
+    setIsValid(
+      primaryTitle &&
+        primaryDescription &&
+        secondaryTitle &&
+        secondaryDescription
+    );
   }, [primaryTitle, primaryDescription, secondaryTitle, secondaryDescription]);
 
   const handleSubmit = async (event) => {
@@ -31,33 +38,35 @@ export default function CheckPlag({ onNext }) {
           secondaryTitle,
           secondaryDescription,
         };
-  
-        const response = await fetch('http://your-api-endpoint.com/check-plagiarism', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-        });
-  
+
+        const response = await fetch(
+          "http://your-api-endpoint.com/check-plagiarism",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          }
+        );
+
         // Check if the request was successful.
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-  
+
         // Parse the JSON response from the backend.
         const data = await response.json();
-  
+
         setPlagiarismResult(data.result);
-        
       } catch (error) {
-        console.error('Fetching plagiarism result failed', error);
-        alert('Fetching plagiarism result failed. Please try again.');
+        console.error("Fetching plagiarism result failed", error);
+        alert("Fetching plagiarism result failed. Please try again.");
       }
     } else {
       alert("Fill all the required fields");
     }
-  };  
+  };
 
   return (
     <div className="flex flex-col justify-center items-center bg-white w-full">
@@ -75,8 +84,6 @@ export default function CheckPlag({ onNext }) {
           iconSrc="/assets/projector-three-filled.svg"
           value={primaryTitle}
           onChange={(e) => setPrimaryTitle(e.target.value)}
-          width="100%"
-          height="42px"
         />
 
         <span className="font-inter font-semibold text-[18px]">
@@ -85,10 +92,9 @@ export default function CheckPlag({ onNext }) {
         <InputField
           type="url"
           placeholder="Primary Project URL"
+          iconSrc="/assets/brackets-curly-thin.svg"
           value={primaryDescription}
           onChange={(e) => setPrimaryDescription(e.target.value)}
-          width="100%"
-          height="42px"
         />
 
         <span className="font-inter font-semibold text-[18px]">
@@ -100,8 +106,6 @@ export default function CheckPlag({ onNext }) {
           iconSrc="/assets/projector-three-filled.svg"
           value={secondaryTitle}
           onChange={(e) => setSecondaryTitle(e.target.value)}
-          width="100%"
-          height="42px"
         />
 
         <span className="font-inter font-semibold text-[18px]">
@@ -110,14 +114,15 @@ export default function CheckPlag({ onNext }) {
         <InputField
           type="url"
           placeholder="Secondary Project URL"
+          iconSrc="/assets/brackets-curly-thin.svg"
           value={secondaryDescription}
           onChange={(e) => setSecondaryDescription(e.target.value)}
-          width="100%"
-          height="42px"
         />
       </div>
 
-      <div className="flex flex-col space-y-4 justify-end mt-4"> {/* Added a gap just before the button with mt-4 */}
+      <div className="flex flex-col space-y-4 justify-end mt-4">
+        {" "}
+        {/* Added a gap just before the button with mt-4 */}
         <form onSubmit={handleSubmit}>
           <button
             style={{ width: "1000px" }}
