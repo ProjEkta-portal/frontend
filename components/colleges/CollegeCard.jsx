@@ -31,6 +31,7 @@ export default function CollegeCard({college}) {
           <Link href={`/colleges/${college.collegeId}`}>
             <p className="text-lg font-inter font-bold">{college.name}</p>
           </Link>
+
           <div className="flex flex-row gap-x-2">
             <p className="text-small">{college.state + ", " + college.city}</p>
           </div>
