@@ -1,11 +1,27 @@
-<<<<<<< HEAD
 // pages/signup/plag-check/page.jsx
 "use client";
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+
+import React, {useState, useEffect} from "react";
 import InputField from "/components/login-and-signup/InputField";
-export default function CheckPlag({ onNext }) {
-  const router = useRouter();
+
+async function getProject(userId, projectName) {
+  console.log(
+    process.env.BACKEND_URL + `/users/${userId}/projects/${projectName}`
+  );
+
+  let res = await fetch(
+    process.env.BACKEND_URL + `/users/${userId}/projects/${projectName}`,
+    {cache: "no-store"}
+  );
+
+  if (!res.ok) {
+    throw new Error("Unable the fetch project");
+  }
+
+  return res.json();
+}
+
+export default async function CheckPlag({onNext}) {
   const [primaryTitle, setPrimaryTitle] = useState("");
   const [primaryDescription, setPrimaryDescription] = useState("");
   const [secondaryTitle, setSecondaryTitle] = useState("");
@@ -13,35 +29,25 @@ export default function CheckPlag({ onNext }) {
   const [isValid, setIsValid] = useState(false);
   const [plagiarismResult, setPlagiarismResult] = useState(null);
 
-  useEffect(() => {
-    console.log(
-      "Is Valid:",
-      primaryTitle &&
-        primaryDescription &&
-        secondaryTitle &&
-        secondaryDescription
-    );
-    setIsValid(
-      primaryTitle &&
-        primaryDescription &&
-        secondaryTitle &&
-        secondaryDescription
-    );
-  }, [primaryTitle, primaryDescription, secondaryTitle, secondaryDescription]);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (isValid) {
       try {
+        let userId1 = primaryTitle;
+        let projectName1 = primaryDescription;
+        let userId2 = secondaryTitle;
+        let projectName2 = secondaryDescription;
+
+        let project1 = await getProject(userId1, projectName1);
+        let project2 = await getProject(userId2, projectName2);
+
         const payload = {
-          primaryTitle,
-          primaryDescription,
-          secondaryTitle,
-          secondaryDescription,
+          text1: project1.description,
+          text2: project2.description,
         };
 
         const response = await fetch(
-          "http://your-api-endpoint.com/check-plagiarism",
+          "https://plag-check-projekta.onrender.com/compare-texts/",
           {
             method: "POST",
             headers: {
@@ -59,7 +65,7 @@ export default function CheckPlag({ onNext }) {
         // Parse the JSON response from the backend.
         const data = await response.json();
 
-        setPlagiarismResult(data.result);
+        setPlagiarismResult(data.similarity_score);
       } catch (error) {
         console.error("Fetching plagiarism result failed", error);
         alert("Fetching plagiarism result failed. Please try again.");
@@ -77,7 +83,7 @@ export default function CheckPlag({ onNext }) {
         </h2>
         {/* INPUT FIELDS */}
         <span className="font-inter font-semibold text-[18px]">
-          Enter the primary Project ID*
+          Enter the primary userId*
         </span>
         <InputField
           type="text"
@@ -85,21 +91,24 @@ export default function CheckPlag({ onNext }) {
           iconSrc="/assets/projector-three-filled.svg"
           value={primaryTitle}
           onChange={(e) => setPrimaryTitle(e.target.value)}
+          width="100%"
+          height="42px"
         />
 
         <span className="font-inter font-semibold text-[18px]">
-          Enter the primary Project URL*
+          Enter the primary projectName*
         </span>
         <InputField
           type="url"
           placeholder="Primary Project URL"
-          iconSrc="/assets/brackets-curly-thin.svg"
           value={primaryDescription}
           onChange={(e) => setPrimaryDescription(e.target.value)}
+          width="100%"
+          height="42px"
         />
 
         <span className="font-inter font-semibold text-[18px]">
-          Enter the secondary Project ID*
+          Enter the secondary userId*
         </span>
         <InputField
           type="text"
@@ -107,17 +116,20 @@ export default function CheckPlag({ onNext }) {
           iconSrc="/assets/projector-three-filled.svg"
           value={secondaryTitle}
           onChange={(e) => setSecondaryTitle(e.target.value)}
+          width="100%"
+          height="42px"
         />
 
         <span className="font-inter font-semibold text-[18px]">
-          Enter the secondary Project URL*
+          Enter the secondary projectName*
         </span>
         <InputField
           type="url"
           placeholder="Secondary Project URL"
-          iconSrc="/assets/brackets-curly-thin.svg"
           value={secondaryDescription}
           onChange={(e) => setSecondaryDescription(e.target.value)}
+          width="100%"
+          height="42px"
         />
       </div>
 
@@ -126,7 +138,7 @@ export default function CheckPlag({ onNext }) {
         {/* Added a gap just before the button with mt-4 */}
         <form onSubmit={handleSubmit}>
           <button
-            style={{ width: "1000px" }}
+            style={{width: "1000px"}}
             type="submit"
             className={`orange-btn h-[75px] flex items-center justify-center transition-transform duration-300 ease-out transform ${
               !isValid ? "opacity-50 cursor-not-allowed" : ""
@@ -147,10 +159,4 @@ export default function CheckPlag({ onNext }) {
       )}
     </div>
   );
-=======
-import PlagCheckPageCard from "./components/PlagCheckPageCard";
-
-export default function PlagCheckPage() {
-  return <PlagCheckPageCard />;
->>>>>>> 8896f50 (made changes)
 }
