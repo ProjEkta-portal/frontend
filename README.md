@@ -1,3 +1,15 @@
+# Frontend of the ProjEkta Portal
+
+## Homepage for an organization:
+![image](https://github.com/ProjEkta-portal/frontend/assets/72344713/bdd2216d-f083-49dd-94e7-26f9ad6942e0)
+<br>
+<br>
+
+## Projects Display page:
+![image](https://github.com/ProjEkta-portal/frontend/assets/72344713/979a28a8-6a04-40e1-9dc5-fa793572912f)
+
+And many other enabling features. Visit the deployed website to explore now!
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
